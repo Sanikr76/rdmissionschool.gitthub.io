@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R.D. Mission School, Bajitpur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS Styles (Design) --- */
+        :root {
+            --primary-color: #003366; 
+            --secondary-color: #ff9900; 
+            --light-bg: #f4f7f6;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-color); line-height: 1.6; }
+
+        /* Header */
+        header { background-color: var(--primary-color); color: var(--white); padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-section { display: flex; align-items: center; gap: 15px; }
+        .logo-icon { font-size: 2.5rem; color: var(--secondary-color); }
+        .school-name h1 { font-size: 1.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .school-name p { font-size: 0.9rem; color: #ddd; }
+        .logout-btn { background: var(--secondary-color); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .logout-btn:hover { background: #cc7a00; }
+
+        /* Navigation */
+        nav { background-color: var(--white); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        nav ul { display: flex; justify-content: center; list-style: none; padding: 10px; flex-wrap: wrap; }
+        nav ul li { margin: 0 15px; }
+        nav ul li a { text-decoration: none; color: var(--primary-color); font-weight: 600; padding: 8px 15px; border-radius: 5px; transition: 0.3s; cursor: pointer; }
+        nav ul li a:hover, nav ul li a.active { background-color: var(--secondary-color); color: var(--white); }
+
+        /* Sections */
+        .section { display: none; padding: 40px 10%; min-height: 60vh; animation: fadeIn 0.5s; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2.section-title { color: var(--primary-color); text-align: center; margin-bottom: 30px; font-size: 2rem; }
+        h2.section-title::after { content: ''; width: 80px; height: 4px; background-color: var(--secondary-color); display: block; margin: 10px auto; }
+
+        /* Home */
+        .hero { text-align: center; margin-bottom: 40px; background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('https://source.unsplash.com/1600x900/?school,building'); background-size: cover; color: white; padding: 60px 20px; border-radius: 10px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .feature-card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .feature-card i { font-size: 2rem; color: var(--secondary-color); margin-bottom: 15px; }
+        
+        /* Forms */
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .btn { display: block; width: 100%; padding: 12px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background-color: #002244; }
+
+        /* Result Display */
+        #result-display { margin-top: 20px; padding: 20px; border: 2px dashed var(--primary-color); background-color: #eef2f5; display: none; text-align: center; }
+
+        /* Dashboard specific styles */
+        .dashboard-card { background: var(--white); padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); text-align: center; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 20px; }
+        .attendance-table th, .attendance-table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        .attendance-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .attendance-table th { background-color: var(--primary-color); color: white; }
+        
+        /* Footer */
+        footer { background-color: #222; color: white; padding: 40px 5%; text-align: center; margin-top: auto; }
+        .admin-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; }
+        .admin-card { background: white; padding: 20px; border-radius: 10px; text-align: center; width: 300px; border-top: 5px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        @media (max-width: 768px) { header { flex-direction: column; text-align: center; } .logo-section { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-section">
+            <i class="fas fa-graduation-cap logo-icon"></i>
+            <div class="school-name">
+                <h1>R.D. Mission School</h1>
+                <p>Bajitpur, Garkha, Saran</p>
+            </div>
+        </div>
+        <div id="header-action-area">
+            <p><i class="fas fa-phone"></i> +91 7674 9554 38</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a onclick="showSection('home')" class="active" id="nav-home">Home</a></li>
+            <li><a onclick="showSection('admission')" id="nav-admission">Admission</a></li>
+            <li><a onclick="showSection('result')" id="nav-result">Result</a></li>
+            <li><a onclick="showSection('teacher')" id="nav-teacher">Teacher Login</a></li>
+            <li><a onclick="showSection('contact')" id="nav-contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="section active">
+        <div class="hero">
+            <h2>Welcome to R.D. Mission School</h2>
+            <p>Shaping the future with knowledge and values.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card"><i class="fas fa-book-reader"></i><h3>Quality Education</h3><p>सभी विषयों को आधुनिक तरीके से पढ़ाया जाता है।</p></div>
+            <div class="feature-card"><i class="fas fa-chalkboard-teacher"></i><h3>Expert Teachers</h3><p>अनुभवी और योग्य शिक्षकों द्वारा मार्गदर्शन।</p></div>
+            <div class="feature-card"><i class="fas fa-child"></i><h3>Student Growth</h3><p>बच्चों के उज्ज्वल भविष्य के लिए सर्वोत्तम वातावरण।</p></div>
+        </div>
+        <h2 class="section-title">Administration</h2>
+        <div class="admin-section">
+            <div class="admin-card">
+                <span style="background:var(--secondary-color); color:white; padding:2px 10px; border-radius:15px; font-size:0.8rem;">Founder (संस्थापक)</span>
+                <h3 style="margin-top:10px; color:var(--primary-color);">Upendra Kumar Prasad Yadav</h3>
+            </div>
+            <div class="admin-card">
+                <span style="background:var(--secondary-color); color:white; padding:2px 10px; border-radius:15px; font-size:0.8rem;">Principal (प्रधानाचार्य)</span>
+                <h3 style="margin-top:10px; color:var(--primary-color);">Sanu Kumar Ram</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="admission" class="section">
+        <h2 class="section-title">New Admission / प्रवेश</h2>
+        <div class="form-container">
+            <form onsubmit="submitAdmission(event)">
+                <div class="form-group"><label>Student Name</label><input type="text" required></div>
+                <div class="form-group"><label>Father's Name</label><input type="text" required></div>
+                <div class="form-group"><label>Class</label>
+                    <select required>
+                        <option value="">Select Class</option>
+                        <option>Nursery - UKG</option>
+                        <option>Class 1 - 5</option>
+                        <option>Class 6 - 8</option>
+                        <option>Class 9 - 10</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Date of Birth</label><input type="date" required></div>
+                <div class="form-group"><label>Mobile</label><input type="tel" required></div>
+                <div class="form-group"><label>Address</label><textarea rows="2"></textarea></div>
+                <button type="submit" class="btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="result" class="section">
+        <h2 class="section-title">Check Student Result / परिणाम</h2>
+        <div class="form-container">
+            <form onsubmit="checkResult(event)">
+                <div class="form-group">
+                    <label>Select Class (कक्षा)</label>
+                    <select id="res-class" required>
+                        <option value="">Select Class</option>
+                        <option>Class N.U.R-A</option>
+                                <option>CLASS N.U.R-B</option>
+                                <option>CLASS L.K.G</option>
+                                <option>CLASS U.K.G</option>
+                        <option>Class 1</option> <option>Class 2</option> <option>Class 3</option>
+                        <option>Class 4</option> <option>Class 5</option> <option>Class 6</option>
+                        <option>Class 7</option> <option>Class 8</option> <option>Class 9</option> <option>Class 10</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Student Name (छात्र का नाम)</label><input type="text" id="res-name" required></div>
+                <div class="form-group"><label>Father's Name (पिता का नाम)</label><input type="text" id="res-fname" required></div>
+                <div class="form-group"><label>Date of Birth (जन्मतिथि)</label><input type="date" id="res-dob" required></div>
+                <button type="submit" class="btn">Check Result</button>
+            </form>
+            <div id="result-display"></div>
+        </div>
+    </div>
+
+    <div id="teacher" class="section">
+        <h2 class="section-title">Teacher Login & Registration</h2>
+        <div class="form-container" style="max-width:400px; text-align:center;">
+            <i class="fas fa-user-tie" style="font-size:3rem; color:var(--primary-color); margin-bottom:20px;"></i>
+            
+            <form onsubmit="teacherLogin(event)">
+                <div class="form-group" style="text-align:left;"><label>Teacher ID</label><input type="text" id="teacher-id" required></div>
+                <div class="form-group" style="text-align:left;"><label>Password</label><input type="password" id="teacher-pass" required></div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 15px;">
+                New Teacher? 
+                <a href="**[यहां अपना Google Form या Registration लिंक डालें]**" 
+                   target="_blank" 
+                   style="color: var(--secondary-color); font-weight: 600;">
+                   Register Here
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div id="teacher-dashboard" class="section">
+        <h2 class="section-title">Teacher Dashboard: Attendance & Records</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3 style="color:var(--primary-color);"><i class="fas fa-calendar-check"></i> Today's Attendance</h3>
+                <p style="color: red; margin: 15px 0;">⚠️ **Warning:** Attendance data will NOT be saved. Requires a server setup.</p>
+                <div class="form-container" style="max-width: 100%; padding: 20px;">
+                    <form onsubmit="recordAttendance(event)">
+                        <div class="form-group">
+                            <label>Select Class</label>
+                            <select required>
+                                <option>Class 5</option>
+                                <option>Class 6</option>
+                                <option>Class 7</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Date</label>
+                            <input type="date" value="2025-12-07" required>
+                        </div>
+                        
+                        <table class="attendance-table">
+                            <thead><tr><th>Roll No.</th><th>Student Name</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Ravi Kumar</td><td><select><option>Present</option><option>Absent</option></select></td></tr>
+                                <tr><td>2</td><td>Priya Sharma</td><td><select><option>Present</option><option>Absent</option></select></td></tr>
+                                <tr><td>3</td><td>Mohan Das</td><td><select><option>Present</option><option>Absent</option></select></td></tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn" style="margin-top: 15px;">Save Attendance (Demo Only)</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 style="color:var(--primary-color);"><i class="fas fa-file-alt"></i> Other Actions</h3>
+                <p>View previous records, manage grades, and other administrative tasks.</p>
+                <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                    <li style="margin-bottom: 10px;"><button class="btn" style="background: #38a169;">View Class Timetable</button></li>
+                    <li><button class="btn" style="background: #3182ce;">Upload Student Grades</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="section">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="form-container" style="text-align:center;">
+            <p><i class="fas fa-map-marker-alt" style="color:var(--secondary-color);"></i> <strong>R.D. Mission School</strong>, Bajitpur, Garkha, Saran, Bihar - 841311</p>
+            <hr style="margin:20px 0;">
+            <p><i class="fas fa-phone-alt" style="color:var(--secondary-color);"></i> +91 7674 9554 38</p>
+            <hr style="margin:20px 0;">
+            <p><i class="fas fa-envelope" style="color:var(--secondary-color);"></i> ramsonukumar90@gmail.com</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 R.D. Mission School. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 1. Navigation Logic
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav ul li a').forEach(l => l.classList.remove('active'));
+            
+            // Hide dashboard on navigation
+            if (sectionId !== 'teacher-dashboard') {
+                document.getElementById('teacher-dashboard').classList.remove('active');
+            }
+            
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('nav-' + sectionId).classList.add('active');
+        }
+
+        // 2. Teacher Logout Logic
+        function teacherLogout() {
+            // Remove logout button
+            document.getElementById('header-action-area').innerHTML = '<p><i class="fas fa-phone"></i> +91 7674 9554 38</p>';
+            // Show main teacher login page
+            showSection('teacher');
+            alert("Logout Successful.");
+        }
+
+        // 3. Teacher Login Logic (DEMO ONLY - HARDCODED)
+        function teacherLogin(e) { 
+            e.preventDefault(); 
+            
+            const inputId = document.getElementById('teacher-id').value;
+            const inputPass = document.getElementById('teacher-pass').value;
+
+            // F I X E D  I D / P A S S W O R D 
+            const CORRECT_ID = "RDMS_001"; 
+            const CORRECT_PASS = "RDMS@123"; 
+            
+            if (inputId === CORRECT_ID && inputPass === CORRECT_PASS) {
+                // Successful Login: Show Dashboard
+                alert("Login Successful! Redirecting to Teacher Dashboard.");
+                
+                // Add Logout Button to Header
+                document.getElementById('header-action-area').innerHTML = 
+                    `<button class="logout-btn" onclick="teacherLogout()">Logout</button>`;
+                
+                // Switch view from Login form to Dashboard
+                document.getElementById('teacher').classList.remove('active');
+                document.getElementById('teacher-dashboard').classList.add('active');
+                document.getElementById('nav-teacher').classList.add('active');
+
+                // Clear input fields
+                document.getElementById('teacher-id').value = 'RDM001';
+                document.getElementById('teacher-pass').value = 'RDM@7674';
+
+            } else {
+                alert("WELCOME TEACHER");
+            }
+        }
+        
+        // 4. Attendance Recording Logic (DEMO ONLY)
+        function recordAttendance(e) {
+            e.preventDefault();
+            // This function would send data to the server in a real application.
+            alert("Attendance Data Received. (Data is NOT saved on this demo website).");
+        }
+
+        function submitAdmission(e) { e.preventDefault(); alert("Application Submitted Successfully!"); }
+
+        // 5. RESULT DATA 
+        const studentDatabase = [
+            { name: "Rohan Kumar", father: "Suresh Prasad", dob: "2015-05-20", class: "Class 5", marks: "450/500", percentage:"90%", status: "PASSED" },
+            { name: "Anjali Kumari", father: "Manoj Yadav", dob: "2014-08-15", class: "Class 6", marks: "380/500", percentage:"76%", status: "PASSED" }
+        ];
+
+        // 6. Result Checking Logic
+        function checkResult(e) {
+            e.preventDefault();
+            const inputClass = document.getElementById('res-class').value;
+            const inputName = document.getElementById('res-name').value.trim().toLowerCase();
+            const inputFname = document.getElementById('res-fname').value.trim().toLowerCase();
+            const inputDob = document.getElementById('res-dob').value;
+            const resultDisplay = document.getElementById('result-display');
+
+            const student = studentDatabase.find(s => 
+                s.class === inputClass &&
+                s.name.toLowerCase() === inputName &&
+                s.father.toLowerCase() === inputFname &&
+                s.dob === inputDob
+            );
+
+            if (student) {
+                const statusColor = student.status.toLowerCase() === 'passed' ? 'green' : 'red';
+                resultDisplay.innerHTML = `
+                    <h3 style="color:green;">परिणाम मिल गया!</h3>
+                    <div style="text-align:left; display:inline-block; margin-top:10px;">
+                        <p><strong>Name:</strong> ${student.name}</p>
+                        <p><strong>Class:</strong> ${student.class}</p>
+                        <hr style="margin:10px 0;">
+                        <p><strong>Marks:</strong> ${student.marks}</p>
+                        <p><strong>Status:</strong> <span style="color:${statusColor}; font-weight:bold;">${student.status}</span></p>
+                    </div>
+                `;
+                resultDisplay.style.borderColor = 'green';
+            } else {
+                resultDisplay.innerHTML = `<h3 style="color:red;">कोई रिकॉर्ड नहीं मिला!</h3><p>कृपया जानकारी सही जाँच करें।</p>`;
+                resultDisplay.style.borderColor = 'red';
+            }
+            resultDisplay.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
