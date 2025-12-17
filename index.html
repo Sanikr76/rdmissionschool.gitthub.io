@@ -435,7 +435,7 @@
             </div>
         </div>
     </div>
-
+   
     <div id="teacher" class="section">
         <h2 class="section-title">Teacher Login / शिक्षक लॉगिन</h2>
         <div class="form-container" style="max-width: 400px;">
@@ -545,9 +545,13 @@
             e.preventDefault();
             
             // Get values
-            const name = document.getElementById('res-name').value;
-            const fname = document.getElementById('res-fname').value;
-            const sClass = document.getElementById('res-class').value;
+           const studentDatabase = [
+            { name: "Rohan Kumar", father: "Suresh Prasad", dob: "2015-05-20", class: "Class 5", marks: "450/500", percentage:"90%", status: "PASSED" },
+            { name: "Anjali Kumari", father: "Manoj Yadav", dob: "2014-08-15", class: "Class 6", marks: "380/500", percentage:"76%", status: "PASSED" },
+            { name :'anand kumar', father :"Ashutosh Kumar", dob :"2014-08-14", class :"class 7", 
+            marks:"560/600", percentage:"93.33%", status:"PASSED"
+            }
+        ];
             
             // Set values to display card
             document.getElementById('out-name').innerText = name;
